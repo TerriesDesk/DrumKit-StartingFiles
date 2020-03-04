@@ -5,12 +5,14 @@ for (var i = 0; i<drumNumber; i++) {
   document.querySelectorAll(".drum")[i].addEventListener("click", function() {
     var buttonInnerHTML = this.innerHTML;
     makeSound(buttonInnerHTML);
+    buttonAnimation(buttonInnerHTML);
   });
 }
 
 // Detecting KeyDown Event
 document.addEventListener("keydown", function(event) {
   makeSound(event.key);
+  buttonAnimation(event.key);
 });
 
 // Play sound depending on event/press
@@ -46,4 +48,12 @@ function makeSound(key) {
     break;
     default:console.log(buttonInnerHTML);
   };
+}
+
+function buttonAnimation(currentKey) {
+  var activeButton = document.querySelector("." + currentKey);
+  activeButton.classList.add('pressed');
+  setTimeout(function() {
+    activeButton.classList.remove('pressed');
+  }, 100);
 }
